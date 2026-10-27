@@ -1,0 +1,99 @@
+{
+  "entities": {
+    "users": {
+      "title": "Users",
+      "description": "User accounts and institutional roles for Dilla University faculty, staff, and students",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "fullName": { "type": "string" },
+        "staffId": { "type": "string" },
+        "role": { "type": "string", "enum": ["instructor", "student", "admin"] },
+        "department": { "type": "string" },
+        "approvalStatus": { "type": "string", "enum": ["PENDING", "APPROVED", "REJECTED"] },
+        "academicRank": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "fullName", "role"]
+    },
+    "schedules": {
+      "title": "Course Schedules",
+      "description": "Official registrar timetables for lectures, labs, and seminars",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "courseCode": { "type": "string" },
+        "courseName": { "type": "string" },
+        "section": { "type": "string" },
+        "instructorId": { "type": "string" },
+        "buildingName": { "type": "string" },
+        "roomCode": { "type": "string" },
+        "geofenceLat": { "type": "number" },
+        "geofenceLng": { "type": "number" },
+        "geofenceRadiusMeters": { "type": "number" },
+        "beaconId": { "type": "string" },
+        "dayOfWeek": { "type": "string" },
+        "startTime": { "type": "string" },
+        "endTime": { "type": "string" },
+        "enrolledCount": { "type": "integer" }
+      },
+      "required": ["id", "courseCode", "courseName", "instructorId", "roomCode"]
+    },
+    "classSessions": {
+      "title": "Class Sessions",
+      "description": "Authoritative lecture sessions created by instructors during geofence and biometric verification",
+      "type": "object",
+      "properties": {
+        "sessionId": { "type": "string" },
+        "scheduleId": { "type": "string" },
+        "instructorId": { "type": "string" },
+        "sessionToken": { "type": "string" },
+        "rollingBeaconCode": { "type": "string" },
+        "status": { "type": "string", "enum": ["PENDING", "ACTIVE", "CONCLUDED", "CANCELLED"] },
+        "startedAt": { "type": "string" },
+        "concludedAt": { "type": "string" },
+        "presentCount": { "type": "integer" },
+        "flaggedCount": { "type": "integer" },
+        "totalEnrolled": { "type": "integer" },
+        "digitalComplianceSeal": { "type": "string" },
+        "isCryptographicallySealed": { "type": "boolean" }
+      },
+      "required": ["sessionId", "scheduleId", "instructorId", "status"]
+    },
+    "studentAttendance": {
+      "title": "Student Attendance Records",
+      "description": "Per-student attendance telemetry, geofence readings, and instructor adjudication",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "sessionId": { "type": "string" },
+        "studentId": { "type": "string" },
+        "studentName": { "type": "string" },
+        "timeJoined": { "type": "string" },
+        "status": { "type": "string", "enum": ["PRESENT", "LATE", "FLAGGED", "EXCUSED", "ABSENT"] },
+        "distanceToPodiumMeters": { "type": "number" },
+        "bleRssi": { "type": "integer" },
+        "verificationMethod": { "type": "string" },
+        "isFlagged": { "type": "boolean" },
+        "anomalyReason": { "type": "string" }
+      },
+      "required": ["id", "sessionId", "studentId", "status"]
+    },
+    "alerts": {
+      "title": "Institutional Alerts",
+      "description": "Real-time dispatch, hardware battery alerts, attendance appeals, and registrar notices",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "category": { "type": "string" },
+        "priority": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "isAcknowledged": { "type": "boolean" }
+      },
+      "required": ["id", "title", "message"]
+    }
+  }
+}

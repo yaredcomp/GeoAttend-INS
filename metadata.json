@@ -1,0 +1,6 @@
+{
+  "name": "GeoAttend INS",
+  "description": "Authoritative mobile attendance and lecture management application for Dilla University instructors with geofence and biometric verification.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
